@@ -49,7 +49,7 @@ pierde al detenerla.
 ## Estructura
 
 ```
-EntradasEspectaculo/
+ACA_3_POO/
 │
 ├── backend/                         # API desarrollada en ASP.NET Core (.NET 10)
 │   │
