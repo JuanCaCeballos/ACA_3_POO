@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Taquilla CUN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header class="encabezado">
+    <div class="contenedor">
+      <h1>Taquilla <span class="marca">CUN</span></h1>
+      <p class="subtitulo">Venta de entradas</p>
+    </div>
+  </header>
+
+  <section class="contenedor seccion-cajero">
+    <article class="tarjeta cajero">
+      <div class="avatar">
+        <img id="fotoPerfil" src="assets/img/perfil.jpg" alt="Foto de perfil de Juan Camilo Ceballos" width="64" height="64">
+        <span id="inicialesPerfil" class="avatar-iniciales" role="img" aria-label="Juan Camilo Ceballos" hidden>JC</span>
+      </div>
+      <div class="cajero-datos">
+        <h2>Datos del cajero</h2>
+        <dl>
+          <div><dt>Nombre</dt><dd>Juan Camilo Ceballos</dd></div>
+          <div><dt>Número de caja</dt><dd>20</dd></div>
+        </dl>
+      </div>
+    </article>
+  </section>
+
+  <main class="contenedor columnas">
+    <section class="columna">
+      <article class="tarjeta">
+        <h2>Datos del espectáculo</h2>
+        <form id="formTaquilla" novalidate>
+          <label for="nombre">Nombre del espectáculo</label>
+          <input id="nombre" name="nombre" type="text" autocomplete="off" placeholder="Ej: Concierto de fin de año" required>
+
+          <label for="precio">Precio por entrada (COP)</label>
+          <input id="precio" name="precio" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej: 50.000" required>
+
+          <p id="errorTaquilla" class="error" role="alert" hidden></p>
+          <button type="submit" class="boton">Abrir taquilla</button>
+        </form>
+      </article>
+
+      <article class="tarjeta">
+        <h2>Compra</h2>
+        <p id="estadoTaquilla" class="estado">Abre la taquilla para registrar compras.</p>
+
+        <form id="formCompra" novalidate>
+          <span class="etiqueta-campo" id="tituloCantidad">Cantidad de entradas</span>
+          <div class="chips" role="group" aria-labelledby="tituloCantidad">
+            <button type="button" class="chip" data-cantidad="1" aria-pressed="true" disabled>
+              <span class="chip-numero">1</span>
+              <span class="chip-descuento" data-descuento="1">0%</span>
+            </button>
+            <button type="button" class="chip" data-cantidad="2" aria-pressed="false" disabled>
+              <span class="chip-numero">2</span>
+              <span class="chip-descuento" data-descuento="2">10%</span>
+            </button>
+            <button type="button" class="chip" data-cantidad="3" aria-pressed="false" disabled>
+              <span class="chip-numero">3</span>
+              <span class="chip-descuento" data-descuento="3">15%</span>
+            </button>
+            <button type="button" class="chip" data-cantidad="4" aria-pressed="false" disabled>
+              <span class="chip-numero">4</span>
+              <span class="chip-descuento" data-descuento="4">20%</span>
+            </button>
+          </div>
+
+          <p id="errorCompra" class="error" role="alert" hidden></p>
+          <button id="botonComprar" type="submit" class="boton" disabled>Registrar compra</button>
+        </form>
+
+        <div id="boleta" class="boleta" aria-live="polite" hidden>
+          <div class="boleta-cuerpo">
+            <p class="boleta-titulo">Boleta <span id="boletaNumero"></span></p>
+            <p id="boletaEspectaculo" class="boleta-espectaculo"></p>
+            <dl class="boleta-detalle">
+              <div><dt>Cantidad</dt><dd id="boletaCantidad"></dd></div>
+              <div><dt>Subtotal</dt><dd id="boletaSubtotal"></dd></div>
+              <div><dt>Descuento</dt><dd id="boletaDescuento"></dd></div>
+            </dl>
+          </div>
+          <div class="boleta-pie">
+            <span>Total a pagar</span>
+            <strong id="boletaTotal"></strong>
+          </div>
+        </div>
+
+        <button id="botonFinalizar" type="button" class="boton boton-secundario" disabled>Finalizar compra</button>
+      </article>
+    </section>
+
+    <section class="columna">
+      <article class="tarjeta">
+        <h2>Tabla de precios</h2>
+        <div class="tabla-contenedor">
+          <table>
+            <thead>
+              <tr><th>Entradas</th><th>Subtotal</th><th>Descuento</th><th>Total</th></tr>
+            </thead>
+            <tbody id="tablaPrecios">
+              <tr><td colspan="4" class="vacio">Abre la taquilla para ver los precios</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="tarjeta">
+        <h2>Ventas</h2>
+        <div class="tabla-contenedor">
+          <table class="tabla-ventas">
+            <thead>
+              <tr><th>Compra</th><th class="espectaculo">Espectáculo</th><th>Entradas</th><th>Descuento</th><th>Total</th></tr>
+            </thead>
+            <tbody id="tablaVentas">
+              <tr><td colspan="5" class="vacio">Aún no hay ventas</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="entradas-vendidas">Entradas vendidas: <strong id="entradasVendidas">0</strong></p>
+
+        <div class="franja-total">
+          <span>Total recaudado</span>
+          <strong id="totalRecaudado">$ 0</strong>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">Juan Camilo Ceballos · Ingeniería de Sistemas · CUN 2026</div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
