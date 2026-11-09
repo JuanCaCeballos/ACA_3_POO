@@ -89,13 +89,31 @@ ACA_3_POO/
 
 ## Cómo ejecutar
 
-Requisito: SDK de .NET 10.
+### Requisitos
+
+- [SDK de .NET 10](https://dotnet.microsoft.com/download/dotnet/10.0). Para comprobarlo, ejecute
+  `dotnet --list-sdks` y verifique que aparezca una versión `10.x`.
+- Git, para clonar el repositorio.
+- Conexión a internet (opcional): solo para cargar la fuente Montserrat; sin ella se usa la fuente del sistema.
+
+### Pasos
 
 ```
+git clone https://github.com/JuanCaCeballos/ACA_3_POO.git
+cd ACA_3_POO
 dotnet run --project backend
 ```
 
-La página se abre en http://localhost:5080.
+El comando se ejecuta desde la carpeta raíz del repositorio. Al iniciar, la página se abre automáticamente
+en el navegador en http://localhost:5080. Para detener la aplicación, presione `Ctrl + C` en la terminal.
+
+### Solución de problemas
+
+- **"No se pudo copiar ... EntradasEspectaculo.exe" o "being used by another process":** hay otra ejecución
+  de la aplicación abierta. Deténgala con `Ctrl + C` en su terminal o cierre el proceso
+  `EntradasEspectaculo` desde el Administrador de tareas, y vuelva a ejecutar el comando.
+- **"address already in use" en el puerto 5080:** otro programa usa ese puerto. Ciérrelo o ejecute la
+  aplicación en otro puerto con `dotnet run --project backend --urls http://localhost:5081`.
 
 ## Endpoints
 
